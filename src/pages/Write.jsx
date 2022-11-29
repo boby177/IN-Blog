@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 
 const Write = () => {
@@ -12,12 +12,14 @@ const Write = () => {
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
 
+  const navigate = useNavigate();
+
   const upload = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
       const res = await axios.post("/upload", formData);
-      console.log(res.data);
+      return res.data;
     } catch (err) {
       console.log(err);
     }
@@ -26,7 +28,6 @@ const Write = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const imgUrl = await upload();
-
     try {
       state
         ? await axios.put(`/posts/${state.id}`, {
@@ -42,6 +43,7 @@ const Write = () => {
             img: file ? imgUrl : "",
             date: moment(Date.now()).format("YYYY-MM-DDTHH:mm:ss"),
           });
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -56,12 +58,14 @@ const Write = () => {
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <ReactQuill
-          className="editor"
-          theme="snow"
-          value={value}
-          onChange={setValue}
-        />
+        <div className="editorContainer">
+          <ReactQuill
+            className="editor"
+            theme="snow"
+            value={value}
+            onChange={setValue}
+          />
+        </div>
       </div>
       <div className="menu">
         <div className="item">
@@ -92,13 +96,13 @@ const Write = () => {
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "art"}
+              checked={cat === "games"}
               name="cat"
-              value="art"
-              id="art"
+              value="games"
+              id="games"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="art">Art</label>
+            <label htmlFor="games">Games</label>
           </div>
           <div className="cat">
             <input
@@ -143,6 +147,17 @@ const Write = () => {
               onChange={(e) => setCat(e.target.value)}
             />
             <label htmlFor="news">News</label>
+          </div>
+          <div className="cat">
+            <input
+              type="radio"
+              checked={cat === "others"}
+              name="cat"
+              value="others"
+              id="others"
+              onChange={(e) => setCat(e.target.value)}
+            />
+            <label htmlFor="others">Others</label>
           </div>
         </div>
       </div>
