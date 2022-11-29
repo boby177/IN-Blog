@@ -27,8 +27,8 @@ const Navbar = () => {
           <Link className="link" to="/?cat=games">
             <h6>Games</h6>
           </Link>
-          <Link className="link" to="/?cat=art">
-            <h6>Art</h6>
+          <Link className="link" to="/?cat=programming">
+            <h6>Programming</h6>
           </Link>
           <Link className="link" to="/?cat=others">
             <h6>Others</h6>
