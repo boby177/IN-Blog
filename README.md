@@ -4,7 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Screenshots
 
-![thumb1](https://raw.githubusercontent.com/boby177/IN-Blog-FrontEnd/main/src/imgs/Screenshot_1.png)
+![thumb1](https://raw.githubusercontent.com/boby177/IN-Blog-FrontEnd/main/src/imgs/Screenshot_3.png)
+
+![thumb2](https://raw.githubusercontent.com/boby177/IN-Blog-FrontEnd/main/src/imgs/Screenshot_2.png)
 
 ## Available Scripts
 
